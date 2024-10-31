@@ -6,170 +6,331 @@
   <title>Space Impact</title>
   <link href="https://fonts.cdnfonts.com/css/star-wars" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<style>
   
-  <style>
-    @import url('https://fonts.cdnfonts.com/css/star-wars');
+@import url('https://fonts.cdnfonts.com/css/star-wars');
 
-    body {
-      margin: 0;
-      overflow: hidden;
-      height: 100vh;
-      background-image: url('/space-impact-bg.jpg'); /* Ensure the path is correct */
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      touch-action: none; /* Prevent touch actions from affecting the body */
-    }
-
-    .play-button {
-      font-size: 5rem; /* Adjust size of the icon */
-      color: #ffcc00; /* Sci-fi yellow */
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      animation: fade-in 1s ease-in;
-      position: absolute; /* Center the button on the screen */
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10; /* Ensure it's above other elements */
-    }
-
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    .content {
-      display: none; /* Hide content initially */
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      overflow: hidden; /* Prevent content overflow */
-      transition: opacity 1s ease-in-out;
-    }
-
-.star-wars-text {
-  font-size: 5vw; /* Use viewport width units for responsive text size */
-  color: #ffcc00; /* Star Wars yellow */
-  font-family: 'Star Wars', sans-serif;
-  visibility: hidden; /* Initially hide the text */
-  animation: make-visible 0s 0s forwards, return 5s ease-in forwards, move-up 5s 5s ease forwards;
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+  background-image: url('/space-impact-bg.jpg'); /* Ensure the path is correct */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  touch-action: none; /* Prevent touch actions from affecting the body */
 }
 
-@keyframes make-visible {
-  to {
-    visibility: visible;
+.play-button {
+  font-size: 5rem; /* Adjust size of the icon */
+  color: #ffcc00; /* Sci-fi yellow */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  animation: fade-in 1s ease-in;
+  position: absolute; /* Center the button on the screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
-    @keyframes crawl {
-      0% {
-        transform: scale(0.5);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(3);
-        opacity: 0;
-      }
-    }
+.content {
+  display: none; /* Hide content initially */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* Prevent content overflow */
+  transition: opacity 1s ease-in-out;
+}
 
-    @keyframes return {
-      0% {
-        transform: scale(3);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
+.star-wars-text {
+font-size: 5vw; /* Use viewport width units for responsive text size */
+color: #ffcc00; /* Star Wars yellow */
+font-family: 'Star Wars', sans-serif;
+visibility: hidden; /* Initially hide the text */
+animation: make-visible 0s 0s forwards, return 5s ease-in forwards, move-up 5s 5s ease forwards;
+}
 
-    @keyframes move-up {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-150px); /* Adjust as needed */
-      }
-    }
+@keyframes make-visible {
+to {
+visibility: visible;
+}
+}
 
-    .ship-element {
-      width: 100px; /* Set the width of the button */
-      height: 100px; /* Set the height of the button */
-      background-image: url('pngwing.com.png'); /* Ensure the path is correct */
-      background-size: cover; /* Ensure the image covers the button */
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat; /* Prevent image repetition */
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      opacity: 0;
-      animation: show-button 1s 8s forwards;
-      position: absolute; /* Make the element absolutely positioned */
-      transition: width 0.3s, height 0.3s; /* Add transition for smooth resizing */
-      z-index: 5; /* Ensure it's above background but below play button */
-    }
+@keyframes crawl {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
 
-    .enemy-element {
-      width: 100px; /* Set the width of the enemy */
-      height: 100px; /* Set the height of the enemy */
-      background-image: url('enemy.png'); /* Ensure the path is correct */
-      background-size: cover; /* Ensure the image covers the button */
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat; /* Prevent image repetition */
-      position: absolute; /* Make the element absolutely positioned */
-      top: 0; /* Start position */
-      animation: move-enemy 5s linear infinite; /* Infinite animation */
-    }
+@keyframes return {
+  0% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
-    .bullet {
-      width: 20px;
-      height: 20px;
-      border-radius: 100px;
-      background: red;
-      position: absolute;
-    }
+@keyframes move-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-150px); /* Adjust as needed */
+  }
+}
 
-    @keyframes show-button {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
+.ship-element {
+  width: 100px; /* Set the width of the button */
+  height: 100px; /* Set the height of the button */
+  background-image: url('pngwing.com.png'); /* Ensure the path is correct */
+  background-size: cover; /* Ensure the image covers the button */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  animation: show-button 1s 8s forwards;
+  position: absolute; /* Make the element absolutely positioned */
+  transition: width 0.3s, height 0.3s; /* Add transition for smooth resizing */
+  z-index: 5; /* Ensure it's above background but below play button */
+}
 
-    @keyframes move-enemy {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(80vh); /* Adjust as needed */
-      }
-    }
-  </style>
-</head>
+.enemy-element {
+  width: 100px; /* Set the width of the enemy */
+  height: 100px; /* Set the height of the enemy */
+  background-image: url('enemy.png'); /* Ensure the path is correct */
+  background-size: cover; /* Ensure the image covers the button */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  position: absolute; /* Make the element absolutely positioned */
+  top: 0; /* Start position */
+  animation: move-enemy 5s linear infinite; /* Infinite animation */
+}
 
+.bullet {
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background: red;
+  position: absolute;
+}
+
+@keyframes show-button {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes move-enemy {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(80vh); /* Adjust as needed */
+  }
+}
+
+@import url('https://fonts.cdnfonts.com/css/star-wars');
+
+body {
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+  background-image: url('/space-impact-bg.jpg'); /* Ensure the path is correct */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  touch-action: none; /* Prevent touch actions from affecting the body */
+}
+
+.play-button {
+  font-size: 5rem; /* Adjust size of the icon */
+  color: #ffcc00; /* Sci-fi yellow */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  animation: fade-in 1s ease-in;
+  position: absolute; /* Center the button on the screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.content {
+  display: none; /* Hide content initially */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* Prevent content overflow */
+  transition: opacity 1s ease-in-out;
+}
+
+.star-wars-text {
+font-size: 5vw; /* Use viewport width units for responsive text size */
+color: #ffcc00; /* Star Wars yellow */
+font-family: 'Star Wars', sans-serif;
+visibility: hidden; /* Initially hide the text */
+animation: make-visible 0s 0s forwards, return 5s ease-in forwards, move-up 5s 5s ease forwards;
+}
+
+@keyframes make-visible {
+to {
+visibility: visible;
+}
+}
+
+@keyframes crawl {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes return {
+  0% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes move-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-150px); /* Adjust as needed */
+  }
+}
+
+.ship-element {
+  width: 100px; /* Set the width of the button */
+  height: 100px; /* Set the height of the button */
+  background-image: url('pngwing.com.png'); /* Ensure the path is correct */
+  background-size: cover; /* Ensure the image covers the button */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  animation: show-button 1s 8s forwards;
+  position: absolute; /* Make the element absolutely positioned */
+  transition: width 0.3s, height 0.3s; /* Add transition for smooth resizing */
+  z-index: 5; /* Ensure it's above background but below play button */
+}
+
+.enemy-element {
+  width: 100px; /* Set the width of the enemy */
+  height: 100px; /* Set the height of the enemy */
+  background-image: url('enemy.png'); /* Ensure the path is correct */
+  background-size: cover; /* Ensure the image covers the button */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  position: absolute; /* Make the element absolutely positioned */
+  top: 0; /* Start position */
+  animation: move-enemy 5s linear infinite; /* Infinite animation */
+}
+
+.bullet {
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background: red;
+  position: absolute;
+}
+
+@keyframes show-button {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes move-enemy {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(80vh); /* Adjust as needed */
+  }
+}
+
+</style>
 <body>
   <button class="play-button" id="play-button">
     <i class="fas fa-play"></i> <!-- Sci-fi play icon -->
@@ -185,6 +346,7 @@
   <audio id="background-audio" src="music.mp3" preload="auto"></audio>
 
 <script>
+  
   // Function to play audio
   function playAudio() {
     const audio = document.getElementById('background-audio');
@@ -310,6 +472,7 @@
 
   // Check for game over condition at regular intervals
   setInterval(checkGameOver, 100);
+
 </script>
 
 
